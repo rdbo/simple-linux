@@ -1,0 +1,1602 @@
+Output of:
+gcc -malign-data=abi -Wall -Wshadow -Wwrite-strings -Wundef -Wstrict-prototypes -Wunused -Wunused-parameter -Wunused-function -Wunused-value -Wmissing-prototypes -Wmissing-declarations -Wno-format-security -Wdeclaration-after-statement -Wold-style-definition -finline-limit=0 -fno-builtin-strlen -fomit-frame-pointer -ffunction-sections -fdata-sections -fno-guess-branch-probability -funsigned-char -static-libgcc -falign-functions=1 -falign-jumps=1 -falign-labels=1 -falign-loops=1 -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-builtin-printf -Oz -static -o busybox_unstripped -Wl,--sort-common -Wl,--sort-section,alignment -Wl,--gc-sections -Wl,--start-group applets/built-in.o archival/lib.a archival/libarchive/lib.a console-tools/lib.a coreutils/lib.a coreutils/libcoreutils/lib.a debianutils/lib.a klibc-utils/lib.a e2fsprogs/lib.a editors/lib.a findutils/lib.a init/lib.a libbb/lib.a libpwdgrp/lib.a loginutils/lib.a mailutils/lib.a miscutils/lib.a modutils/lib.a networking/lib.a networking/libiproute/lib.a networking/udhcp/lib.a printutils/lib.a procps/lib.a runit/lib.a selinux/lib.a shell/lib.a sysklogd/lib.a util-linux/lib.a util-linux/volume_id/lib.a archival/built-in.o archival/libarchive/built-in.o console-tools/built-in.o coreutils/built-in.o coreutils/libcoreutils/built-in.o debianutils/built-in.o klibc-utils/built-in.o e2fsprogs/built-in.o editors/built-in.o findutils/built-in.o init/built-in.o libbb/built-in.o libpwdgrp/built-in.o loginutils/built-in.o mailutils/built-in.o miscutils/built-in.o modutils/built-in.o networking/built-in.o networking/libiproute/built-in.o networking/udhcp/built-in.o printutils/built-in.o procps/built-in.o runit/built-in.o selinux/built-in.o shell/built-in.o sysklogd/built-in.o util-linux/built-in.o util-linux/volume_id/built-in.o -Wl,--end-group -Wl,--warn-common -Wl,-Map,busybox_unstripped.map -Wl,--verbose
+==========
+GNU ld (GNU Binutils) 2.41
+  Supported emulations:
+   elf_x86_64
+   elf32_x86_64
+   elf_i386
+   elf_iamcu
+   i386pep
+   i386pe
+using internal linker script:
+==================================================
+/* Script for -z combreloc -z separate-code -z relro -z now */
+/* Copyright (C) 2014-2023 Free Software Foundation, Inc.
+   Copying and distribution of this script, with or without modification,
+   are permitted in any medium without royalty provided the copyright
+   notice and this notice are preserved.  */
+OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
+	      "elf64-x86-64")
+OUTPUT_ARCH(i386:x86-64)
+ENTRY(_start)
+SEARCH_DIR("=/usr/x86_64-alpine-linux-musl/lib64"); SEARCH_DIR("=/usr/local/lib64"); SEARCH_DIR("=/lib64"); SEARCH_DIR("=/usr/lib64"); SEARCH_DIR("=/usr/x86_64-alpine-linux-musl/lib"); SEARCH_DIR("=/usr/local/lib"); SEARCH_DIR("=/lib"); SEARCH_DIR("=/usr/lib");
+SECTIONS
+{
+  PROVIDE (__executable_start = SEGMENT_START("text-segment", 0x400000)); . = SEGMENT_START("text-segment", 0x400000) + SIZEOF_HEADERS;
+  .interp         : { *(.interp) }
+  .note.gnu.build-id  : { *(.note.gnu.build-id) }
+  .hash           : { *(.hash) }
+  .gnu.hash       : { *(.gnu.hash) }
+  .dynsym         : { *(.dynsym) }
+  .dynstr         : { *(.dynstr) }
+  .gnu.version    : { *(.gnu.version) }
+  .gnu.version_d  : { *(.gnu.version_d) }
+  .gnu.version_r  : { *(.gnu.version_r) }
+  .rela.dyn       :
+    {
+      *(.rela.init)
+      *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+      *(.rela.fini)
+      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+      *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+      *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+      *(.rela.ctors)
+      *(.rela.dtors)
+      *(.rela.got)
+      *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+      *(.rela.ldata .rela.ldata.* .rela.gnu.linkonce.l.*)
+      *(.rela.lbss .rela.lbss.* .rela.gnu.linkonce.lb.*)
+      *(.rela.lrodata .rela.lrodata.* .rela.gnu.linkonce.lr.*)
+      *(.rela.ifunc)
+    }
+  .rela.plt       :
+    {
+      *(.rela.plt)
+      PROVIDE_HIDDEN (__rela_iplt_start = .);
+      *(.rela.iplt)
+      PROVIDE_HIDDEN (__rela_iplt_end = .);
+    }
+  .relr.dyn : { *(.relr.dyn) }
+  . = ALIGN(CONSTANT (MAXPAGESIZE));
+  .init           :
+  {
+    KEEP (*(SORT_NONE(.init)))
+  }
+  .plt            : { *(.plt) *(.iplt) }
+.plt.got        : { *(.plt.got) }
+.plt.sec        : { *(.plt.sec) }
+  .text           :
+  {
+    *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+    *(.text.exit .text.exit.*)
+    *(.text.startup .text.startup.*)
+    *(.text.hot .text.hot.*)
+    *(SORT(.text.sorted.*))
+    *(.text .stub .text.* .gnu.linkonce.t.*)
+    /* .gnu.warning sections are handled specially by elf.em.  */
+    *(.gnu.warning)
+  }
+  .fini           :
+  {
+    KEEP (*(SORT_NONE(.fini)))
+  }
+  PROVIDE (__etext = .);
+  PROVIDE (_etext = .);
+  PROVIDE (etext = .);
+  . = ALIGN(CONSTANT (MAXPAGESIZE));
+  /* Adjust the address for the rodata segment.  We want to adjust up to
+     the same address within the page on the next page up.  */
+  . = SEGMENT_START("rodata-segment", ALIGN(CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 1)));
+  .rodata         : { *(.rodata .rodata.* .gnu.linkonce.r.*) }
+  .rodata1        : { *(.rodata1) }
+  .eh_frame_hdr   : { *(.eh_frame_hdr) *(.eh_frame_entry .eh_frame_entry.*) }
+  .eh_frame       : ONLY_IF_RO { KEEP (*(.eh_frame)) *(.eh_frame.*) }
+  .sframe         : ONLY_IF_RO { *(.sframe) *(.sframe.*) }
+  .gcc_except_table   : ONLY_IF_RO { *(.gcc_except_table .gcc_except_table.*) }
+  .gnu_extab   : ONLY_IF_RO { *(.gnu_extab*) }
+  /* These sections are generated by the Sun/Oracle C++ compiler.  */
+  .exception_ranges   : ONLY_IF_RO { *(.exception_ranges*) }
+  /* Adjust the address for the data segment.  We want to adjust up to
+     the same address within the page on the next page up.  */
+  . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE));
+  /* Exception handling  */
+  .eh_frame       : ONLY_IF_RW { KEEP (*(.eh_frame)) *(.eh_frame.*) }
+  .sframe         : ONLY_IF_RW { *(.sframe) *(.sframe.*) }
+  .gnu_extab      : ONLY_IF_RW { *(.gnu_extab) }
+  .gcc_except_table   : ONLY_IF_RW { *(.gcc_except_table .gcc_except_table.*) }
+  .exception_ranges   : ONLY_IF_RW { *(.exception_ranges*) }
+  /* Thread Local Storage sections  */
+  .tdata	  :
+   {
+     PROVIDE_HIDDEN (__tdata_start = .);
+     *(.tdata .tdata.* .gnu.linkonce.td.*)
+   }
+  .tbss		  : { *(.tbss .tbss.* .gnu.linkonce.tb.*) *(.tcommon) }
+  .preinit_array    :
+  {
+    PROVIDE_HIDDEN (__preinit_array_start = .);
+    KEEP (*(.preinit_array))
+    PROVIDE_HIDDEN (__preinit_array_end = .);
+  }
+  .init_array    :
+  {
+    PROVIDE_HIDDEN (__init_array_start = .);
+    KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
+    KEEP (*(.init_array EXCLUDE_FILE (*crtbegin*.o *crtend*.o ) .ctors))
+    PROVIDE_HIDDEN (__init_array_end = .);
+  }
+  .fini_array    :
+  {
+    PROVIDE_HIDDEN (__fini_array_start = .);
+    KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
+    KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin*.o *crtend*.o ) .dtors))
+    PROVIDE_HIDDEN (__fini_array_end = .);
+  }
+  .ctors          :
+  {
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    KEEP (*crtbegin*.o(.ctors))
+    /* We don't want to include the .ctor section from
+       the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend*.o ) .ctors))
+    KEEP (*(SORT(.ctors.*)))
+    KEEP (*(.ctors))
+  }
+  .dtors          :
+  {
+    KEEP (*crtbegin*.o(.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend*.o ) .dtors))
+    KEEP (*(SORT(.dtors.*)))
+    KEEP (*(.dtors))
+  }
+  .jcr            : { KEEP (*(.jcr)) }
+  .data.rel.ro : { *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*) *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*) }
+  .dynamic        : { *(.dynamic) }
+  .got            : { *(.got.plt) *(.igot.plt) *(.got) *(.igot) }
+  . = DATA_SEGMENT_RELRO_END (0, .);
+  .data           :
+  {
+    *(.data .data.* .gnu.linkonce.d.*)
+    SORT(CONSTRUCTORS)
+  }
+  .data1          : { *(.data1) }
+  _edata = .; PROVIDE (edata = .);
+  . = .;
+  __bss_start = .;
+  .bss            :
+  {
+   *(.dynbss)
+   *(.bss .bss.* .gnu.linkonce.b.*)
+   *(COMMON)
+   /* Align here to ensure that the .bss section occupies space up to
+      _end.  Align after .bss to ensure correct alignment even if the
+      .bss section disappears because there are no input sections.
+      FIXME: Why do we need it? When there is no .bss section, we do not
+      pad the .data section.  */
+   . = ALIGN(. != 0 ? 64 / 8 : 1);
+  }
+  .lbss   :
+  {
+    *(.dynlbss)
+    *(.lbss .lbss.* .gnu.linkonce.lb.*)
+    *(LARGE_COMMON)
+  }
+  . = ALIGN(64 / 8);
+  . = SEGMENT_START("ldata-segment", .);
+  .lrodata   ALIGN(CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 1)) :
+  {
+    *(.lrodata .lrodata.* .gnu.linkonce.lr.*)
+  }
+  .ldata   ALIGN(CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 1)) :
+  {
+    *(.ldata .ldata.* .gnu.linkonce.l.*)
+    . = ALIGN(. != 0 ? 64 / 8 : 1);
+  }
+  . = ALIGN(64 / 8);
+  _end = .; PROVIDE (end = .);
+  . = DATA_SEGMENT_END (.);
+  /* Stabs debugging sections.  */
+  .stab          0 : { *(.stab) }
+  .stabstr       0 : { *(.stabstr) }
+  .stab.excl     0 : { *(.stab.excl) }
+  .stab.exclstr  0 : { *(.stab.exclstr) }
+  .stab.index    0 : { *(.stab.index) }
+  .stab.indexstr 0 : { *(.stab.indexstr) }
+  .comment 0 (INFO) : { *(.comment); LINKER_VERSION; }
+  .gnu.build.attributes : { *(.gnu.build.attributes .gnu.build.attributes.*) }
+  /* DWARF debug sections.
+     Symbols in the DWARF debugging sections are relative to the beginning
+     of the section so we begin them at 0.  */
+  /* DWARF 1.  */
+  .debug          0 : { *(.debug) }
+  .line           0 : { *(.line) }
+  /* GNU DWARF 1 extensions.  */
+  .debug_srcinfo  0 : { *(.debug_srcinfo) }
+  .debug_sfnames  0 : { *(.debug_sfnames) }
+  /* DWARF 1.1 and DWARF 2.  */
+  .debug_aranges  0 : { *(.debug_aranges) }
+  .debug_pubnames 0 : { *(.debug_pubnames) }
+  /* DWARF 2.  */
+  .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
+  .debug_abbrev   0 : { *(.debug_abbrev) }
+  .debug_line     0 : { *(.debug_line .debug_line.* .debug_line_end) }
+  .debug_frame    0 : { *(.debug_frame) }
+  .debug_str      0 : { *(.debug_str) }
+  .debug_loc      0 : { *(.debug_loc) }
+  .debug_macinfo  0 : { *(.debug_macinfo) }
+  /* SGI/MIPS DWARF 2 extensions.  */
+  .debug_weaknames 0 : { *(.debug_weaknames) }
+  .debug_funcnames 0 : { *(.debug_funcnames) }
+  .debug_typenames 0 : { *(.debug_typenames) }
+  .debug_varnames  0 : { *(.debug_varnames) }
+  /* DWARF 3.  */
+  .debug_pubtypes 0 : { *(.debug_pubtypes) }
+  .debug_ranges   0 : { *(.debug_ranges) }
+  /* DWARF 5.  */
+  .debug_addr     0 : { *(.debug_addr) }
+  .debug_line_str 0 : { *(.debug_line_str) }
+  .debug_loclists 0 : { *(.debug_loclists) }
+  .debug_macro    0 : { *(.debug_macro) }
+  .debug_names    0 : { *(.debug_names) }
+  .debug_rnglists 0 : { *(.debug_rnglists) }
+  .debug_str_offsets 0 : { *(.debug_str_offsets) }
+  .debug_sup      0 : { *(.debug_sup) }
+  .gnu.attributes 0 : { KEEP (*(.gnu.attributes)) }
+  /DISCARD/ : { *(.note.GNU-stack) *(.gnu_debuglink) *(.gnu.lto_*) }
+}
+
+
+==================================================
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../x86_64-alpine-linux-musl/bin/ld: mode elf_x86_64
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/crt1.o succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/crt1.o
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/crti.o succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/crti.o
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/crtbeginT.o succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/crtbeginT.o
+attempt to open applets/built-in.o succeeded
+applets/built-in.o
+attempt to open archival/lib.a succeeded
+archival/lib.a
+attempt to open archival/libarchive/lib.a succeeded
+archival/libarchive/lib.a
+attempt to open console-tools/lib.a succeeded
+console-tools/lib.a
+attempt to open coreutils/lib.a succeeded
+coreutils/lib.a
+attempt to open coreutils/libcoreutils/lib.a succeeded
+coreutils/libcoreutils/lib.a
+attempt to open debianutils/lib.a succeeded
+debianutils/lib.a
+attempt to open klibc-utils/lib.a succeeded
+klibc-utils/lib.a
+attempt to open e2fsprogs/lib.a succeeded
+e2fsprogs/lib.a
+attempt to open editors/lib.a succeeded
+editors/lib.a
+attempt to open findutils/lib.a succeeded
+findutils/lib.a
+attempt to open init/lib.a succeeded
+init/lib.a
+attempt to open libbb/lib.a succeeded
+libbb/lib.a
+(libbb/lib.a)appletlib.o
+(libbb/lib.a)compare_string_array.o
+(libbb/lib.a)concat_path_file.o
+(libbb/lib.a)default_error_retval.o
+(libbb/lib.a)get_last_path_component.o
+(libbb/lib.a)last_char_is.o
+(libbb/lib.a)llist.o
+(libbb/lib.a)messages.o
+(libbb/lib.a)perror_msg.o
+(libbb/lib.a)ptr_to_globals.o
+(libbb/lib.a)skip_whitespace.o
+(libbb/lib.a)verror_msg.o
+(libbb/lib.a)wfopen.o
+(libbb/lib.a)xfunc_die.o
+(libbb/lib.a)xfuncs.o
+(libbb/lib.a)xfuncs_printf.o
+(libbb/lib.a)xreadlink.o
+(libbb/lib.a)copyfd.o
+(libbb/lib.a)full_write.o
+(libbb/lib.a)read.o
+(libbb/lib.a)safe_write.o
+(libbb/lib.a)signals.o
+(libbb/lib.a)time.o
+(libbb/lib.a)xgetcwd.o
+(libbb/lib.a)bb_strtonum.o
+attempt to open libpwdgrp/lib.a succeeded
+libpwdgrp/lib.a
+(libpwdgrp/lib.a)pwd_grp.o
+(libpwdgrp/lib.a)uidgid_get.o
+attempt to open loginutils/lib.a succeeded
+loginutils/lib.a
+(loginutils/lib.a)add-remove-shell.o
+(loginutils/lib.a)addgroup.o
+(loginutils/lib.a)adduser.o
+(loginutils/lib.a)chpasswd.o
+(loginutils/lib.a)cryptpw.o
+(loginutils/lib.a)deluser.o
+(loginutils/lib.a)getty.o
+(loginutils/lib.a)login.o
+(loginutils/lib.a)passwd.o
+(loginutils/lib.a)su.o
+(loginutils/lib.a)sulogin.o
+(loginutils/lib.a)vlock.o
+attempt to open mailutils/lib.a succeeded
+mailutils/lib.a
+(mailutils/lib.a)makemime.o
+(mailutils/lib.a)popmaildir.o
+(mailutils/lib.a)reformime.o
+(mailutils/lib.a)sendmail.o
+(mailutils/lib.a)mail.o
+attempt to open miscutils/lib.a succeeded
+miscutils/lib.a
+(miscutils/lib.a)adjtimex.o
+(miscutils/lib.a)ascii.o
+(miscutils/lib.a)bc.o
+(miscutils/lib.a)beep.o
+(miscutils/lib.a)chat.o
+(miscutils/lib.a)conspy.o
+(miscutils/lib.a)crond.o
+(miscutils/lib.a)crontab.o
+(miscutils/lib.a)devmem.o
+(miscutils/lib.a)fbsplash.o
+(miscutils/lib.a)hdparm.o
+(miscutils/lib.a)hexedit.o
+(miscutils/lib.a)i2c_tools.o
+(miscutils/lib.a)less.o
+(miscutils/lib.a)lsscsi.o
+(miscutils/lib.a)makedevs.o
+(miscutils/lib.a)man.o
+(miscutils/lib.a)microcom.o
+(miscutils/lib.a)mt.o
+(miscutils/lib.a)nandwrite.o
+(miscutils/lib.a)partprobe.o
+(miscutils/lib.a)raidautorun.o
+(miscutils/lib.a)readahead.o
+(miscutils/lib.a)runlevel.o
+(miscutils/lib.a)rx.o
+(miscutils/lib.a)seedrng.o
+(miscutils/lib.a)setfattr.o
+(miscutils/lib.a)setserial.o
+(miscutils/lib.a)strings.o
+(miscutils/lib.a)time.o
+(miscutils/lib.a)tree.o
+(miscutils/lib.a)ts.o
+(miscutils/lib.a)ttysize.o
+(miscutils/lib.a)ubi_tools.o
+(miscutils/lib.a)ubirename.o
+(miscutils/lib.a)volname.o
+(miscutils/lib.a)watchdog.o
+attempt to open modutils/lib.a succeeded
+modutils/lib.a
+(modutils/lib.a)modinfo.o
+(modutils/lib.a)modprobe-small.o
+(modutils/lib.a)modutils.o
+attempt to open networking/lib.a succeeded
+networking/lib.a
+(networking/lib.a)arp.o
+(networking/lib.a)arping.o
+(networking/lib.a)brctl.o
+(networking/lib.a)dnsd.o
+(networking/lib.a)ether-wake.o
+(networking/lib.a)ftpd.o
+(networking/lib.a)ftpgetput.o
+(networking/lib.a)hostname.o
+(networking/lib.a)httpd.o
+(networking/lib.a)ifconfig.o
+(networking/lib.a)ifenslave.o
+(networking/lib.a)ifplugd.o
+(networking/lib.a)ifupdown.o
+(networking/lib.a)inetd.o
+(networking/lib.a)interface.o
+(networking/lib.a)ip.o
+(networking/lib.a)ipcalc.o
+(networking/lib.a)isrv_identd.o
+(networking/lib.a)nameif.o
+(networking/lib.a)nbd-client.o
+(networking/lib.a)nc.o
+(networking/lib.a)netstat.o
+(networking/lib.a)nslookup.o
+(networking/lib.a)ntpd.o
+(networking/lib.a)parse_pasv_epsv.o
+(networking/lib.a)ping.o
+(networking/lib.a)pscan.o
+(networking/lib.a)route.o
+(networking/lib.a)slattach.o
+(networking/lib.a)ssl_client.o
+(networking/lib.a)tc.o
+(networking/lib.a)tcpudp.o
+(networking/lib.a)tcpudp_perhost.o
+(networking/lib.a)telnet.o
+(networking/lib.a)telnetd.o
+(networking/lib.a)tftp.o
+(networking/lib.a)tls.o
+(networking/lib.a)tls_aes.o
+(networking/lib.a)tls_aesgcm.o
+(networking/lib.a)tls_fe.o
+(networking/lib.a)tls_pstm.o
+(networking/lib.a)tls_pstm_montgomery_reduce.o
+(networking/lib.a)tls_pstm_mul_comba.o
+(networking/lib.a)tls_pstm_sqr_comba.o
+(networking/lib.a)tls_rsa.o
+(networking/lib.a)tls_sp_c32.o
+(networking/lib.a)traceroute.o
+(networking/lib.a)tunctl.o
+(networking/lib.a)vconfig.o
+(networking/lib.a)wget.o
+(networking/lib.a)whois.o
+(networking/lib.a)zcip.o
+(networking/lib.a)isrv.o
+attempt to open networking/libiproute/lib.a succeeded
+networking/libiproute/lib.a
+(networking/libiproute/lib.a)ip_parse_common_args.o
+(networking/libiproute/lib.a)ipaddress.o
+(networking/libiproute/lib.a)iplink.o
+(networking/libiproute/lib.a)ipneigh.o
+(networking/libiproute/lib.a)iproute.o
+(networking/libiproute/lib.a)iprule.o
+(networking/libiproute/lib.a)iptunnel.o
+(networking/libiproute/lib.a)libnetlink.o
+(networking/libiproute/lib.a)ll_addr.o
+(networking/libiproute/lib.a)ll_map.o
+(networking/libiproute/lib.a)ll_proto.o
+(networking/libiproute/lib.a)ll_types.o
+(networking/libiproute/lib.a)rt_names.o
+(networking/libiproute/lib.a)rtm_map.o
+(networking/libiproute/lib.a)utils.o
+attempt to open networking/udhcp/lib.a succeeded
+networking/udhcp/lib.a
+(networking/udhcp/lib.a)d6_dhcpc.o
+(networking/udhcp/lib.a)d6_packet.o
+(networking/udhcp/lib.a)d6_socket.o
+(networking/udhcp/lib.a)dhcpc.o
+(networking/udhcp/lib.a)dhcpd.o
+(networking/udhcp/lib.a)dhcprelay.o
+(networking/udhcp/lib.a)domain_codec.o
+(networking/udhcp/lib.a)dumpleases.o
+(networking/udhcp/lib.a)packet.o
+(networking/udhcp/lib.a)signalpipe.o
+(networking/udhcp/lib.a)socket.o
+(networking/udhcp/lib.a)arpping.o
+(networking/udhcp/lib.a)common.o
+attempt to open printutils/lib.a succeeded
+printutils/lib.a
+(printutils/lib.a)lpd.o
+(printutils/lib.a)lpr.o
+attempt to open procps/lib.a succeeded
+procps/lib.a
+(procps/lib.a)free.o
+(procps/lib.a)fuser.o
+(procps/lib.a)iostat.o
+(procps/lib.a)kill.o
+(procps/lib.a)lsof.o
+(procps/lib.a)mpstat.o
+(procps/lib.a)nmeter.o
+(procps/lib.a)pgrep.o
+(procps/lib.a)pidof.o
+(procps/lib.a)pmap.o
+(procps/lib.a)powertop.o
+(procps/lib.a)ps.o
+(procps/lib.a)pstree.o
+(procps/lib.a)pwdx.o
+(procps/lib.a)smemcap.o
+(procps/lib.a)sysctl.o
+(procps/lib.a)top.o
+(procps/lib.a)uptime.o
+(procps/lib.a)watch.o
+attempt to open runit/lib.a succeeded
+runit/lib.a
+(runit/lib.a)chpst.o
+(runit/lib.a)runsv.o
+(runit/lib.a)runsvdir.o
+(runit/lib.a)sv.o
+(runit/lib.a)svlogd.o
+attempt to open selinux/lib.a succeeded
+selinux/lib.a
+attempt to open shell/lib.a succeeded
+shell/lib.a
+(shell/lib.a)ash.o
+(shell/lib.a)ash_ptr_hack.o
+(shell/lib.a)cttyhack.o
+(shell/lib.a)hush.o
+(shell/lib.a)match.o
+(shell/lib.a)math.o
+(shell/lib.a)random.o
+(shell/lib.a)shell_common.o
+attempt to open sysklogd/lib.a succeeded
+sysklogd/lib.a
+(sysklogd/lib.a)klogd.o
+(sysklogd/lib.a)logread.o
+(sysklogd/lib.a)syslogd_and_logger.o
+attempt to open util-linux/lib.a succeeded
+util-linux/lib.a
+(util-linux/lib.a)acpid.o
+(util-linux/lib.a)blkdiscard.o
+(util-linux/lib.a)blkid.o
+(util-linux/lib.a)blockdev.o
+(util-linux/lib.a)cal.o
+(util-linux/lib.a)chrt.o
+(util-linux/lib.a)dmesg.o
+(util-linux/lib.a)eject.o
+(util-linux/lib.a)fallocate.o
+(util-linux/lib.a)fatattr.o
+(util-linux/lib.a)fbset.o
+(util-linux/lib.a)fdformat.o
+(util-linux/lib.a)fdisk.o
+(util-linux/lib.a)findfs.o
+(util-linux/lib.a)flock.o
+(util-linux/lib.a)freeramdisk.o
+(util-linux/lib.a)fsck_minix.o
+(util-linux/lib.a)fsfreeze.o
+(util-linux/lib.a)fstrim.o
+(util-linux/lib.a)getopt.o
+(util-linux/lib.a)hexdump.o
+(util-linux/lib.a)hexdump_xxd.o
+(util-linux/lib.a)hwclock.o
+(util-linux/lib.a)ionice.o
+(util-linux/lib.a)ipcrm.o
+(util-linux/lib.a)ipcs.o
+(util-linux/lib.a)last_fancy.o
+(util-linux/lib.a)losetup.o
+(util-linux/lib.a)lspci.o
+(util-linux/lib.a)lsusb.o
+(util-linux/lib.a)mdev.o
+(util-linux/lib.a)mesg.o
+(util-linux/lib.a)mkfs_ext2.o
+(util-linux/lib.a)mkfs_minix.o
+(util-linux/lib.a)mkfs_vfat.o
+(util-linux/lib.a)mkswap.o
+(util-linux/lib.a)more.o
+(util-linux/lib.a)mount.o
+(util-linux/lib.a)mountpoint.o
+(util-linux/lib.a)nsenter.o
+(util-linux/lib.a)pivot_root.o
+(util-linux/lib.a)rdate.o
+(util-linux/lib.a)rdev.o
+(util-linux/lib.a)readprofile.o
+(util-linux/lib.a)renice.o
+(util-linux/lib.a)rev.o
+(util-linux/lib.a)rtcwake.o
+(util-linux/lib.a)script.o
+(util-linux/lib.a)scriptreplay.o
+(util-linux/lib.a)setarch.o
+(util-linux/lib.a)setpriv.o
+(util-linux/lib.a)setsid.o
+(util-linux/lib.a)swaponoff.o
+(util-linux/lib.a)switch_root.o
+(util-linux/lib.a)taskset.o
+(util-linux/lib.a)uevent.o
+(util-linux/lib.a)umount.o
+(util-linux/lib.a)unshare.o
+(util-linux/lib.a)wall.o
+attempt to open util-linux/volume_id/lib.a succeeded
+util-linux/volume_id/lib.a
+(util-linux/volume_id/lib.a)get_devname.o
+(util-linux/volume_id/lib.a)volume_id.o
+(util-linux/volume_id/lib.a)xfs.o
+(util-linux/volume_id/lib.a)bcache.o
+(util-linux/volume_id/lib.a)btrfs.o
+(util-linux/volume_id/lib.a)cramfs.o
+(util-linux/volume_id/lib.a)erofs.o
+(util-linux/volume_id/lib.a)exfat.o
+(util-linux/volume_id/lib.a)ext.o
+(util-linux/volume_id/lib.a)f2fs.o
+(util-linux/volume_id/lib.a)fat.o
+(util-linux/volume_id/lib.a)hfs.o
+(util-linux/volume_id/lib.a)iso9660.o
+(util-linux/volume_id/lib.a)jfs.o
+(util-linux/volume_id/lib.a)lfs.o
+(util-linux/volume_id/lib.a)linux_raid.o
+(util-linux/volume_id/lib.a)linux_swap.o
+(util-linux/volume_id/lib.a)luks.o
+(util-linux/volume_id/lib.a)minix.o
+(util-linux/volume_id/lib.a)nilfs.o
+(util-linux/volume_id/lib.a)ntfs.o
+(util-linux/volume_id/lib.a)ocfs2.o
+(util-linux/volume_id/lib.a)reiserfs.o
+(util-linux/volume_id/lib.a)romfs.o
+(util-linux/volume_id/lib.a)squashfs.o
+(util-linux/volume_id/lib.a)sysv.o
+(util-linux/volume_id/lib.a)ubifs.o
+(util-linux/volume_id/lib.a)udf.o
+(util-linux/volume_id/lib.a)util.o
+attempt to open archival/built-in.o succeeded
+archival/built-in.o
+attempt to open archival/libarchive/built-in.o succeeded
+archival/libarchive/built-in.o
+attempt to open console-tools/built-in.o succeeded
+console-tools/built-in.o
+attempt to open coreutils/built-in.o succeeded
+coreutils/built-in.o
+attempt to open coreutils/libcoreutils/built-in.o succeeded
+coreutils/libcoreutils/built-in.o
+attempt to open debianutils/built-in.o succeeded
+debianutils/built-in.o
+attempt to open klibc-utils/built-in.o succeeded
+klibc-utils/built-in.o
+attempt to open e2fsprogs/built-in.o succeeded
+e2fsprogs/built-in.o
+attempt to open editors/built-in.o succeeded
+editors/built-in.o
+attempt to open findutils/built-in.o succeeded
+findutils/built-in.o
+attempt to open init/built-in.o succeeded
+init/built-in.o
+attempt to open libbb/built-in.o succeeded
+libbb/built-in.o
+attempt to open libpwdgrp/built-in.o succeeded
+libpwdgrp/built-in.o
+attempt to open loginutils/built-in.o succeeded
+loginutils/built-in.o
+attempt to open mailutils/built-in.o succeeded
+mailutils/built-in.o
+attempt to open miscutils/built-in.o succeeded
+miscutils/built-in.o
+attempt to open modutils/built-in.o succeeded
+modutils/built-in.o
+attempt to open networking/built-in.o succeeded
+networking/built-in.o
+attempt to open networking/libiproute/built-in.o succeeded
+networking/libiproute/built-in.o
+attempt to open networking/udhcp/built-in.o succeeded
+networking/udhcp/built-in.o
+attempt to open printutils/built-in.o succeeded
+printutils/built-in.o
+attempt to open procps/built-in.o succeeded
+procps/built-in.o
+attempt to open runit/built-in.o succeeded
+runit/built-in.o
+attempt to open selinux/built-in.o succeeded
+selinux/built-in.o
+attempt to open shell/built-in.o succeeded
+shell/built-in.o
+attempt to open sysklogd/built-in.o succeeded
+sysklogd/built-in.o
+attempt to open util-linux/built-in.o succeeded
+util-linux/built-in.o
+attempt to open util-linux/volume_id/built-in.o succeeded
+util-linux/volume_id/built-in.o
+archival/lib.a
+(archival/lib.a)bbunzip.o
+(archival/lib.a)bzip2.o
+(archival/lib.a)chksum_and_xwrite_tar_header.o
+(archival/lib.a)cpio.o
+(archival/lib.a)dpkg.o
+(archival/lib.a)dpkg_deb.o
+(archival/lib.a)gzip.o
+(archival/lib.a)lzop.o
+(archival/lib.a)rpm.o
+(archival/lib.a)tar.o
+(archival/lib.a)unzip.o
+archival/libarchive/lib.a
+(archival/libarchive/lib.a)common.o
+(archival/libarchive/lib.a)data_extract_all.o
+(archival/libarchive/lib.a)data_extract_to_command.o
+(archival/libarchive/lib.a)data_extract_to_stdout.o
+(archival/libarchive/lib.a)data_skip.o
+(archival/libarchive/lib.a)decompress_bunzip2.o
+(archival/libarchive/lib.a)decompress_gunzip.o
+(archival/libarchive/lib.a)decompress_unlzma.o
+(archival/libarchive/lib.a)decompress_unxz.o
+(archival/libarchive/lib.a)filter_accept_list.o
+(archival/libarchive/lib.a)filter_accept_list_reassign.o
+(archival/libarchive/lib.a)filter_accept_reject_list.o
+(archival/libarchive/lib.a)find_list_entry.o
+(archival/libarchive/lib.a)get_header_cpio.o
+(archival/libarchive/lib.a)get_header_tar.o
+(archival/libarchive/lib.a)get_header_tar_bz2.o
+(archival/libarchive/lib.a)get_header_tar_gz.o
+(archival/libarchive/lib.a)get_header_tar_lzma.o
+(archival/libarchive/lib.a)get_header_tar_xz.o
+(archival/libarchive/lib.a)header_list.o
+(archival/libarchive/lib.a)header_verbose_list.o
+(archival/libarchive/lib.a)init_handle.o
+(archival/libarchive/lib.a)lzo1x_1.o
+(archival/libarchive/lib.a)lzo1x_1o.o
+(archival/libarchive/lib.a)lzo1x_d.o
+(archival/libarchive/lib.a)open_transformer.o
+(archival/libarchive/lib.a)seek_by_jump.o
+(archival/libarchive/lib.a)seek_by_read.o
+(archival/libarchive/lib.a)unpack_ar_archive.o
+(archival/libarchive/lib.a)unsafe_prefix.o
+(archival/libarchive/lib.a)unsafe_symlink_target.o
+(archival/libarchive/lib.a)data_align.o
+(archival/libarchive/lib.a)filter_accept_all.o
+(archival/libarchive/lib.a)get_header_ar.o
+(archival/libarchive/lib.a)header_skip.o
+console-tools/lib.a
+(console-tools/lib.a)chvt.o
+(console-tools/lib.a)clear.o
+(console-tools/lib.a)deallocvt.o
+(console-tools/lib.a)dumpkmap.o
+(console-tools/lib.a)fgconsole.o
+(console-tools/lib.a)kbd_mode.o
+(console-tools/lib.a)loadfont.o
+(console-tools/lib.a)loadkmap.o
+(console-tools/lib.a)openvt.o
+(console-tools/lib.a)reset.o
+(console-tools/lib.a)resize.o
+(console-tools/lib.a)setconsole.o
+(console-tools/lib.a)setkeycodes.o
+(console-tools/lib.a)setlogcons.o
+(console-tools/lib.a)showkey.o
+coreutils/lib.a
+(coreutils/lib.a)basename.o
+(coreutils/lib.a)cat.o
+(coreutils/lib.a)chgrp.o
+(coreutils/lib.a)chmod.o
+(coreutils/lib.a)chown.o
+(coreutils/lib.a)chroot.o
+(coreutils/lib.a)cksum.o
+(coreutils/lib.a)comm.o
+(coreutils/lib.a)cp.o
+(coreutils/lib.a)cut.o
+(coreutils/lib.a)date.o
+(coreutils/lib.a)dd.o
+(coreutils/lib.a)df.o
+(coreutils/lib.a)dirname.o
+(coreutils/lib.a)dos2unix.o
+(coreutils/lib.a)du.o
+(coreutils/lib.a)echo.o
+(coreutils/lib.a)env.o
+(coreutils/lib.a)expand.o
+(coreutils/lib.a)expr.o
+(coreutils/lib.a)factor.o
+(coreutils/lib.a)false.o
+(coreutils/lib.a)fold.o
+(coreutils/lib.a)head.o
+(coreutils/lib.a)hostid.o
+(coreutils/lib.a)id.o
+(coreutils/lib.a)install.o
+(coreutils/lib.a)link.o
+(coreutils/lib.a)ln.o
+(coreutils/lib.a)logname.o
+(coreutils/lib.a)ls.o
+(coreutils/lib.a)md5_sha1_sum.o
+(coreutils/lib.a)mkdir.o
+(coreutils/lib.a)mkfifo.o
+(coreutils/lib.a)mknod.o
+(coreutils/lib.a)mktemp.o
+(coreutils/lib.a)mv.o
+(coreutils/lib.a)nice.o
+(coreutils/lib.a)nl.o
+(coreutils/lib.a)nohup.o
+(coreutils/lib.a)nproc.o
+(coreutils/lib.a)od.o
+(coreutils/lib.a)paste.o
+(coreutils/lib.a)printenv.o
+(coreutils/lib.a)printf.o
+(coreutils/lib.a)pwd.o
+(coreutils/lib.a)readlink.o
+(coreutils/lib.a)realpath.o
+(coreutils/lib.a)rm.o
+(coreutils/lib.a)rmdir.o
+(coreutils/lib.a)seq.o
+(coreutils/lib.a)shred.o
+(coreutils/lib.a)shuf.o
+(coreutils/lib.a)sleep.o
+(coreutils/lib.a)sort.o
+(coreutils/lib.a)split.o
+(coreutils/lib.a)stat.o
+(coreutils/lib.a)stty.o
+(coreutils/lib.a)sum.o
+(coreutils/lib.a)sync.o
+(coreutils/lib.a)tac.o
+(coreutils/lib.a)tail.o
+(coreutils/lib.a)tee.o
+(coreutils/lib.a)test.o
+(coreutils/lib.a)test_ptr_hack.o
+(coreutils/lib.a)timeout.o
+(coreutils/lib.a)touch.o
+(coreutils/lib.a)tr.o
+(coreutils/lib.a)true.o
+(coreutils/lib.a)truncate.o
+(coreutils/lib.a)tsort.o
+(coreutils/lib.a)tty.o
+(coreutils/lib.a)uname.o
+(coreutils/lib.a)uniq.o
+(coreutils/lib.a)unlink.o
+(coreutils/lib.a)usleep.o
+(coreutils/lib.a)uudecode.o
+(coreutils/lib.a)uuencode.o
+(coreutils/lib.a)wc.o
+(coreutils/lib.a)who.o
+(coreutils/lib.a)whoami.o
+(coreutils/lib.a)yes.o
+coreutils/libcoreutils/lib.a
+(coreutils/libcoreutils/lib.a)cp_mv_stat.o
+(coreutils/libcoreutils/lib.a)getopt_mk_fifo_nod.o
+debianutils/lib.a
+(debianutils/lib.a)pipe_progress.o
+(debianutils/lib.a)run_parts.o
+(debianutils/lib.a)start_stop_daemon.o
+(debianutils/lib.a)which.o
+klibc-utils/lib.a
+(klibc-utils/lib.a)resume.o
+e2fsprogs/lib.a
+(e2fsprogs/lib.a)chattr.o
+(e2fsprogs/lib.a)e2fs_lib.o
+(e2fsprogs/lib.a)fsck.o
+(e2fsprogs/lib.a)lsattr.o
+editors/lib.a
+(editors/lib.a)awk.o
+(editors/lib.a)cmp.o
+(editors/lib.a)diff.o
+(editors/lib.a)ed.o
+(editors/lib.a)patch.o
+(editors/lib.a)sed.o
+(editors/lib.a)vi.o
+findutils/lib.a
+(findutils/lib.a)find.o
+(findutils/lib.a)grep.o
+(findutils/lib.a)xargs.o
+init/lib.a
+(init/lib.a)bootchartd.o
+(init/lib.a)halt.o
+(init/lib.a)init.o
+libbb/lib.a
+(libbb/lib.a)ask_confirmation.o
+(libbb/lib.a)auto_string.o
+(libbb/lib.a)bb_askpass.o
+(libbb/lib.a)bb_cat.o
+(libbb/lib.a)bb_do_delay.o
+(libbb/lib.a)bb_getgroups.o
+(libbb/lib.a)bb_getsockname.o
+(libbb/lib.a)bb_pwd.o
+(libbb/lib.a)bb_qsort.o
+(libbb/lib.a)capability.o
+(libbb/lib.a)change_identity.o
+(libbb/lib.a)chomp.o
+(libbb/lib.a)common_bufsiz.o
+(libbb/lib.a)concat_subpath_file.o
+(libbb/lib.a)copy_file.o
+(libbb/lib.a)correct_password.o
+(libbb/lib.a)crc32.o
+(libbb/lib.a)device_open.o
+(libbb/lib.a)dump.o
+(libbb/lib.a)duration.o
+(libbb/lib.a)endofname.o
+(libbb/lib.a)executable.o
+(libbb/lib.a)fclose_nonstdin.o
+(libbb/lib.a)fflush_stdout_and_exit.o
+(libbb/lib.a)fgets_str.o
+(libbb/lib.a)find_mount_point.o
+(libbb/lib.a)find_pid_by_name.o
+(libbb/lib.a)find_root_device.o
+(libbb/lib.a)get_console.o
+(libbb/lib.a)get_cpu_count.o
+(libbb/lib.a)get_line_from_file.o
+(libbb/lib.a)get_shell_name.o
+(libbb/lib.a)get_volsize.o
+(libbb/lib.a)getopt32.o
+(libbb/lib.a)getopt_allopts.o
+(libbb/lib.a)getpty.o
+(libbb/lib.a)hash_md5_sha.o
+(libbb/lib.a)hash_md5_sha256_x86-64_shaNI.o
+(libbb/lib.a)hash_md5_sha_x86-64_shaNI.o
+(libbb/lib.a)herror_msg.o
+(libbb/lib.a)human_readable.o
+(libbb/lib.a)in_ether.o
+(libbb/lib.a)inet_cksum.o
+(libbb/lib.a)inet_common.o
+(libbb/lib.a)inode_hash.o
+(libbb/lib.a)isdirectory.o
+(libbb/lib.a)isqrt.o
+(libbb/lib.a)iterate_on_dir.o
+(libbb/lib.a)kernel_version.o
+(libbb/lib.a)lineedit.o
+(libbb/lib.a)lineedit_ptr_hack.o
+(libbb/lib.a)logenv.o
+(libbb/lib.a)login.o
+(libbb/lib.a)loop.o
+(libbb/lib.a)make_directory.o
+(libbb/lib.a)match_fstype.o
+(libbb/lib.a)mode_string.o
+(libbb/lib.a)nuke_str.o
+(libbb/lib.a)obscure.o
+(libbb/lib.a)parse_config.o
+(libbb/lib.a)parse_mode.o
+(libbb/lib.a)percent_decode.o
+(libbb/lib.a)perror_nomsg_and_die.o
+(libbb/lib.a)pidfile.o
+(libbb/lib.a)print_flags.o
+(libbb/lib.a)print_numbered_lines.o
+(libbb/lib.a)printable.o
+(libbb/lib.a)printable_string.o
+(libbb/lib.a)process_escape_sequence.o
+(libbb/lib.a)procps.o
+(libbb/lib.a)progress.o
+(libbb/lib.a)pw_encrypt.o
+(libbb/lib.a)read_key.o
+(libbb/lib.a)read_printf.o
+(libbb/lib.a)recursive_action.o
+(libbb/lib.a)remove_file.o
+(libbb/lib.a)replace.o
+(libbb/lib.a)rtc.o
+(libbb/lib.a)run_shell.o
+(libbb/lib.a)safe_gethostname.o
+(libbb/lib.a)safe_poll.o
+(libbb/lib.a)safe_strncpy.o
+(libbb/lib.a)securetty.o
+(libbb/lib.a)setup_environment.o
+(libbb/lib.a)simplify_path.o
+(libbb/lib.a)single_argv.o
+(libbb/lib.a)speed_table.o
+(libbb/lib.a)str_tolower.o
+(libbb/lib.a)strrstr.o
+(libbb/lib.a)sysconf.o
+(libbb/lib.a)trim.o
+(libbb/lib.a)u_signal_names.o
+(libbb/lib.a)ubi.o
+(libbb/lib.a)udp_io.o
+(libbb/lib.a)unicode.o
+(libbb/lib.a)update_passwd.o
+(libbb/lib.a)utmp.o
+(libbb/lib.a)uuencode.o
+(libbb/lib.a)vfork_daemon_rexec.o
+(libbb/lib.a)warn_ignoring_args.o
+(libbb/lib.a)wfopen_input.o
+(libbb/lib.a)write.o
+(libbb/lib.a)xatonum.o
+(libbb/lib.a)xconnect.o
+(libbb/lib.a)xgethostbyname.o
+(libbb/lib.a)xrealloc_vector.o
+(libbb/lib.a)xregcomp.o
+(libbb/lib.a)perror_nomsg.o
+libpwdgrp/lib.a
+loginutils/lib.a
+mailutils/lib.a
+miscutils/lib.a
+modutils/lib.a
+networking/lib.a
+networking/libiproute/lib.a
+networking/udhcp/lib.a
+printutils/lib.a
+procps/lib.a
+runit/lib.a
+selinux/lib.a
+shell/lib.a
+sysklogd/lib.a
+util-linux/lib.a
+util-linux/volume_id/lib.a
+archival/built-in.o
+archival/libarchive/built-in.o
+console-tools/built-in.o
+coreutils/built-in.o
+coreutils/libcoreutils/built-in.o
+debianutils/built-in.o
+klibc-utils/built-in.o
+e2fsprogs/built-in.o
+editors/built-in.o
+findutils/built-in.o
+init/built-in.o
+libbb/built-in.o
+libpwdgrp/built-in.o
+loginutils/built-in.o
+mailutils/built-in.o
+miscutils/built-in.o
+modutils/built-in.o
+networking/built-in.o
+networking/libiproute/built-in.o
+networking/udhcp/built-in.o
+printutils/built-in.o
+procps/built-in.o
+runit/built-in.o
+selinux/built-in.o
+shell/built-in.o
+sysklogd/built-in.o
+util-linux/built-in.o
+util-linux/volume_id/built-in.o
+archival/lib.a
+archival/libarchive/lib.a
+console-tools/lib.a
+coreutils/lib.a
+coreutils/libcoreutils/lib.a
+debianutils/lib.a
+klibc-utils/lib.a
+e2fsprogs/lib.a
+editors/lib.a
+findutils/lib.a
+init/lib.a
+libbb/lib.a
+libpwdgrp/lib.a
+loginutils/lib.a
+mailutils/lib.a
+miscutils/lib.a
+modutils/lib.a
+networking/lib.a
+networking/libiproute/lib.a
+networking/udhcp/lib.a
+printutils/lib.a
+procps/lib.a
+runit/lib.a
+selinux/lib.a
+shell/lib.a
+sysklogd/lib.a
+util-linux/lib.a
+util-linux/volume_id/lib.a
+archival/built-in.o
+archival/libarchive/built-in.o
+console-tools/built-in.o
+coreutils/built-in.o
+coreutils/libcoreutils/built-in.o
+debianutils/built-in.o
+klibc-utils/built-in.o
+e2fsprogs/built-in.o
+editors/built-in.o
+findutils/built-in.o
+init/built-in.o
+libbb/built-in.o
+libpwdgrp/built-in.o
+loginutils/built-in.o
+mailutils/built-in.o
+miscutils/built-in.o
+modutils/built-in.o
+networking/built-in.o
+networking/libiproute/built-in.o
+networking/udhcp/built-in.o
+printutils/built-in.o
+procps/built-in.o
+runit/built-in.o
+selinux/built-in.o
+shell/built-in.o
+sysklogd/built-in.o
+util-linux/built-in.o
+util-linux/volume_id/built-in.o
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libssp_nonshared.a failed
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../x86_64-alpine-linux-musl/lib/../lib/libssp_nonshared.a failed
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libssp_nonshared.a succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libssp_nonshared.a
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libgcc.a succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libgcc.a
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libgcc_eh.a succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libgcc_eh.a
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libc.a failed
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../x86_64-alpine-linux-musl/lib/../lib/libc.a failed
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sysconf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)alphasort.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)closedir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)opendir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)readdir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)scandir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__environ.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__libc_start_main.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stack_chk_fail.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clearenv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getenv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)putenv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setenv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)unsetenv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__errno_location.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strerror.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)exit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)creat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fcntl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)open.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_fallocate.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)defsysinfo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)libc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)syscall_ret.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)msgctl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)msgget.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)semctl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)semget.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)semop.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)shmat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)shmctl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)shmdt.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)shmget.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)daemon.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getusershell.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)utmpx.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)adjtimex.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)cap.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)chroot.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clock_adjtime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)flock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getrandom.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)klogctl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mount.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)personality.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pivot_root.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)prctl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)readahead.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)reboot.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sendfile.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setgroups.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sethostname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setns.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)settimeofday.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)swap.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)syncfs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sysinfo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)unshare.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)utimes.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wait3.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wait4.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)xattr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__lctrans.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcoll.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)calloc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)free.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lite_malloc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)free.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)malloc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)realloc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)replaced.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)atan2.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)cos.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)exp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)exp_data.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)log.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)log_data.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pow.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pow_data.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sin.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fabs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sqrt.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dirname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getauxval.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gethostid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getopt.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getopt_long.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpriority.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getresgid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getresuid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getrlimit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ioctl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mntent.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pty.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)realpath.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setpriority.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setrlimit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)syscall.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)syslog.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)uname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mmap.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mprotect.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)munlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)munmap.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mblen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mbtowc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)accept.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)bind.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)connect.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ether.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)freeaddrinfo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getaddrinfo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gethostbyaddr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gethostbyaddr_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gethostbyname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gethostbyname2.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gethostbyname2_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getifaddrs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getnameinfo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpeername.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getservbyname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getservbyname_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getservbyport.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getservbyport_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getsockname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getsockopt.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)h_errno.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)hstrerror.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)htons.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)if_indextoname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)if_nametoindex.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)inet_aton.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)inet_ntoa.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)inet_ntop.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)inet_pton.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)listen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lookup_ipliteral.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lookup_name.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lookup_serv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)netlink.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ns_parse.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ntohs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)recv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)recvfrom.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)recvmsg.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)res_mkquery.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)res_msend.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)res_send.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)resolvconf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)send.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sendmsg.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sendto.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setsockopt.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)shutdown.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)socket.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)socketpair.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)rand.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)execl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)execle.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)execlp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)execv.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)execve.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)execvp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fork.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)system.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wait.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)waitpid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vfork.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fnmatch.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)glob.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)regcomp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)regerror.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)regexec.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tre-mem.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)affinity.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sched_get_priority_max.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sched_yield.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)poll.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)select.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)longjmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setjmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)block.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)kill.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)killpg.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)raise.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setitimer.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigaction.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigaddset.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigdelset.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigemptyset.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigfillset.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigisemptyset.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigismember.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)siglongjmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)signal.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigprocmask.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigrtmax.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigrtmin.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigsuspend.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigtimedwait.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)restore.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigsetjmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)chmod.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fchmod.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fstat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fstatat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)futimens.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)futimesat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lstat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mkdir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mkfifo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mknod.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)stat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)statvfs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)umask.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)utimensat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__fclose_ca.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__fdopen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__fopen_rb_ca.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__lockfile.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stdio_close.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stdio_read.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stdio_seek.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stdio_write.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)asprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clearerr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fclose.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)feof.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ferror.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fflush.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fgets.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fileno.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fmemopen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fopen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fputc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fputs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fread.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)freopen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fscanf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fseek.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ftell.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fwrite.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getc_unlocked.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getchar_unlocked.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getline.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ofl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ofl_add.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pclose.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)popen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)printf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)putc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)putc_unlocked.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)putchar_unlocked.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)puts.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)rename.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)rewind.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)scanf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setbuf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setvbuf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)snprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sscanf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)stderr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)stdin.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)stdout.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ungetc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vasprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vdprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vfprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vfscanf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vscanf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vsnprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vsprintf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vsscanf.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)atof.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)atoi.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)atoll.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)bsearch.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)div.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)qsort_nr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strtod.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strtol.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)memchr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)memcmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mempcpy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)memrchr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)stpcpy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)stpncpy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcasecmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcasestr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcat.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strchr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strchrnul.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcpy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strcspn.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strdup.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strlen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strncasecmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strncmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strncpy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strndup.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strnlen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strpbrk.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strrchr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strsep.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strsignal.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strspn.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strstr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strtok_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strverscmp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)memcpy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)memmove.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)memset.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mkdtemp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mkstemp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mktemp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)cfgetospeed.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)cfmakeraw.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)cfsetospeed.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcdrain.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcflush.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcgetattr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcgetsid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcsendbreak.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcsetattr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__lock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__syscall_cp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lock_ptc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_cleanup_push.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_rdlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_timedrdlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_tryrdlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_unlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_wrlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_setcancelstate.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_sigmask.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_testcancel.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)synccall.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__tz.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__year_to_secs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clock_gettime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clock_settime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ctime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gettimeofday.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gmtime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)gmtime_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)localtime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)localtime_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mktime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)nanosleep.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strftime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)strptime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)time.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)timegm.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)times.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)_exit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)access.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)acct.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)alarm.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)chdir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)chown.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)close.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dup.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dup2.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dup3.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fchdir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fchown.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fdatasync.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fsync.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ftruncate.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getcwd.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getegid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)geteuid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getgid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getgroups.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getlogin_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpgrp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getppid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getsid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getuid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)isatty.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lchown.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)link.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)lseek.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)nice.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pause.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pipe.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pipe2.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pread.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)read.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)readlink.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)rmdir.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setegid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)seteuid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setgid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setpgid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setpgrp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setresgid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setresuid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setsid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setuid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)setxid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sleep.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)symlink.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sync.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcgetpgrp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tcsetpgrp.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)ttyname_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)unlink.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)usleep.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)write.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)isalnum.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswalnum.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswalpha.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswctype.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswgraph.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswlower.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswprint.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswpunct.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswspace.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswupper.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswxdigit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)tolower.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)towctrans.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__init_tls.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)_Exit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)abort_lock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)floatscan.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)intscan.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)procfdname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)shgetc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)vdso.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)langinfo.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)realloc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__cos.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__fpclassifyl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__math_divzero.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__math_invalid.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__math_oflow.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__math_uflow.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__math_xflow.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__rem_pio2.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__rem_pio2_large.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__signbitl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__sin.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)atan.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)copysignl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)floor.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)frexpl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)scalbn.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)scalbnl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fabsl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)fmodl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mremap.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)internal.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mbrtowc.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mbsinit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mbstowcs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wctomb.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dn_expand.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dn_skipname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)dns_parse.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpw_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)_Fork.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawn.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawn_file_actions_addclose.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawn_file_actions_adddup2.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawn_file_actions_destroy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawn_file_actions_init.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawnattr_destroy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawnattr_init.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawnattr_setflags.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawnattr_setsigdefault.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)posix_spawnattr_setsigmask.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sigsetjmp_tail.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__fmodeflags.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__overflow.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stdout_write.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__toread.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__towrite.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__uflow.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getdelim.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)qsort.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wcschr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wcslen.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__randname.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mkostemps.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__timedwait.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)default_attr.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_timedwrlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)pthread_rwlock_trywrlock.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sem_destroy.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sem_init.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sem_post.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sem_wait.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__set_thread_area.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clone.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__map_file.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__month_to_secs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__secs_to_tm.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__tm_to_secs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)asctime.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)asctime_r.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)clock_nanosleep.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getlogin.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswblank.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)iswcntrl.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)c_locale.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)mbsrtowcs.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)wcrtomb.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpw_a.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)getpwent_a.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)nscd_query.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)__stdio_exit.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sem_timedwait.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)sem_trywait.lo
+(/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a)isblank.lo
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libgcc.a
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/libgcc_eh.a
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/libc.a
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/crtend.o succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/crtend.o
+attempt to open /usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/crtn.o succeeded
+/usr/lib/gcc/x86_64-alpine-linux-musl/13.1.1/../../../../lib/crtn.o
